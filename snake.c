@@ -15,7 +15,7 @@ void sna_init(int w,int h)
   context.head->begin.w=context.head->end.w=w/2;
   context.head->pre=NULL;
   context.tail=context.head;
-  context.seed_rnd=20131028;
+  context.seed_rnd=999;
   context.dir=SNA_RIGHT;
   context.food_exist=0;
   context.food_pos.w=context.food_pos.h=0;
@@ -24,16 +24,19 @@ void sna_init(int w,int h)
 
 void sna_rndfood()
 {
+  
   if(context.food_exist==0)
     {
       srand(context.seed_rnd);
       int h,w;
+      h=rand()%context.map.h;
+      w=rand()%context.map.w;
+
       while(context.map.map[context.map.w*h+w]!=SNA_EMPTY)
 	{
-	  h=rand()%context.map.h;
+     	  h=rand()%context.map.h;
 	  w=rand()%context.map.w;
 	}
-      context.seed_rnd=h*w;
       context.food_pos.h=h;
       context.food_pos.w=w;
       context.food_exist=1;
@@ -41,7 +44,7 @@ void sna_rndfood()
 	  
     }
   context.map.map[context.food_pos.h*context.map.w+context.food_pos.w]=SNA_FOOD;
-
+ 
 }
 
 
@@ -79,6 +82,7 @@ int sna_to(sna_direct d)
 
 int sna_console_update(sna_direct d)
 {
+
   sna_to(d);
   int ret=sna_move_head();
   if(ret==SNA_DIE)
