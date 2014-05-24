@@ -24,7 +24,7 @@
 
 #define SNA_FOOD '*'
 #define SNA_BLOCK '%'
-#define SNA_EMPTY '.'
+#define SNA_EMPTY '+'
 #define SNA_SELF '0'
 #define SNA_HEAD_LEFT '<'
 #define SNA_HEAD_RIGHT '>'
